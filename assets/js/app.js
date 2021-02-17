@@ -1,4 +1,6 @@
 // Assignment Code
+
+/************* Start of stubbing ***************************/
 var generateBtn = document.querySelector("#generate");
 
 //Prompt users for password criteria in order to generate password
@@ -42,6 +44,10 @@ var passLength = function() {
 
   return pwLength; 
 }
+
+/***********************end of stubbing + the last line of this file ********/
+
+
 
 //Prompt to include UPPERCASE letters, "true" if yes otherwise "false"
 var yesUpper = function() {

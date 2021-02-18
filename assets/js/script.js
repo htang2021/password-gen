@@ -3,27 +3,27 @@ var generateBtn = document.querySelector("#generate");
 
 var generatePassword = function () {
     var pwLength = passwordLength();
-    var needLower = yesLower();
-    var needUpper = yesUpper();
-    var needNumber = yesNumber();
-    var needSpChar = yesSpChar();
-    checkNumOfCharType(needLower, needUpper, needNumber, needSpChar);
+    var needLower = isLowerCaseRequired();
+    var needUpper = isUpperCaseRequired();
+    var needNumber = isNumberRequired();
+    var needSpChar = isSpecialCharRequired();
+    checkPasswordCharTypeRequirement(needLower, needUpper, needNumber, needSpChar);
     var psWord = "";
     for (i=0; i < pwLength; i++) {
         if (needLower) {
-            psWord += genLowerCaseLetter();
+            psWord += genOneRandomLowerCaseLetter();
             needLower = false;
         } else if (needUpper) {
-            psWord += genCapLetter();
+            psWord += genOneRandomUpperCaseLetter();
             needUpper = false;
         } else if (needNumber) {
-            psWord += genRandomNum();
+            psWord += genOneRandomNumber();
             needNumber = false;
         } else if (needSpChar) {
-            psWord += genSpecialChar();
+            psWord += genOneRandomSpecialChar();
             needSpChar = false;
         } else {
-            psWord += genGenericChar();
+            psWord += genOneRandomGenericChar();
         }
     }
     return psWord; 
@@ -58,14 +58,14 @@ var passwordLength = function () {
 }
 
 // Prompt to include Upper Case letter and validate entry
-var yesUpper = function () {
+var isUpperCaseRequired = function () {
     var includeUpperCase = prompt("Do you want to include UPPER CASE letters in your password? \n" +
     "Please enter 1 for YES; 0 for NO.");
     includeUpperCase = parseInt(includeUpperCase);
 
     if (includeUpperCase != 1 && includeUpperCase != 0) {
         alert("You have entered an incorrect value.  Please try again.");
-        yesUpper();
+        isUpperCaseRequired();
     } else if (includeUpperCase) {
         return true;
     } else {
@@ -74,14 +74,14 @@ var yesUpper = function () {
 }
 
 //Prompt to include lower case letter and validate entry
-var yesLower = function() {
+var isLowerCaseRequired = function() {
     var includeLowerCase = prompt("Do you want to include lower CASE letters in your password? \n" +
     "Please enter 1 for YES; 0 for NO.");
     includeLowerCase = parseInt(includeLowerCase);
 
     if (includeLowerCase != 0 && includeLowerCase != 1) {
         alert("You have entered an incorrect value.  Please try again.");
-        yesLower();
+        isLowerCaseRequired();
     } else if (includeLowerCase) {
         return true;
     } else {
@@ -90,14 +90,14 @@ var yesLower = function() {
 }
 
 //Prompt to include numeric value and validate entry
-var yesNumber = function() {
+var isNumberRequired = function() {
     var includeNum = prompt("Do you want to include numeric values in your password? \n" +
     "Please enter 1 for YES; 0 for NO.");
     includeNum = parseInt(includeNum);
 
     if (includeNum != 1 && includeNum != 0) {
         alert("You have entered an incorrect value.  Please try again.");
-        yesNumber();
+        isNumberRequired();
     } else if (includeNum) {
         return true;
     } else {
@@ -106,14 +106,14 @@ var yesNumber = function() {
 }
 
 //Prompt to include special character and validate entry
-var yesSpChar = function() {
+var isSpecialCharRequired = function() {
     var includeSpChar = prompt("Do you want to include special characters in your password? \n" +
     "Please enter 1 for YES; 0 for NO.");
     includeSpChar = parseInt(includeSpChar);
 
     if (includeSpChar != 1 && includeSpChar != 0) {
         alert("You have entered an incorrect value.  Please try again.");
-        yesSpChar();
+        isSpecialCharRequired();
     } else if (includeSpChar) {
         return true;
     } else {
@@ -122,7 +122,7 @@ var yesSpChar = function() {
 }
 
 //Check if at least one character type is selected
-var checkNumOfCharType = function (needLower, needUpper, needNumber, needSpChar) {
+var checkPasswordCharTypeRequirement = function (needLower, needUpper, needNumber, needSpChar) {
     if (needLower === false && needUpper === false && needNumber === false && needSpChar === false) {
         alert("You need at least one character type in your password. \n" +
         "Please start over!");
@@ -135,7 +135,7 @@ var checkNumOfCharType = function (needLower, needUpper, needNumber, needSpChar)
 /**** Generate random character out of a string argument *******/
 /***************************************************************/
 
-var randomOut = function (stringArg) {
+var getOneRandomChar = function (stringArg) {
     var stringIndex = Math.floor(Math.random() * stringArg.length);
     return stringArg[stringIndex];
 }
@@ -144,33 +144,33 @@ var randomOut = function (stringArg) {
 /**************************************************************/
 
 //Generate a random Upper case letter
-var genCapLetter = function() {
+var genOneRandomUpperCaseLetter = function() {
     const capLetters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-    return randomOut(capLetters);
+    return getOneRandomChar(capLetters);
 }
 
 //Generate a random lower case letter
-var genLowerCaseLetter = function () {
+var genOneRandomLowerCaseLetter = function () {
     const lowerCaseLetters = "abcdefghijklmnopqrstuvwxyz"
-    return randomOut(lowerCaseLetters);
+    return getOneRandomChar(lowerCaseLetters);
 }
 
 //Generate a random number between 0-9
-var genRandomNum = function () {
+var genOneRandomNumber = function () {
     const ranNum = "0123456789"
-    return randomOut(ranNum);
+    return getOneRandomChar(ranNum);
 }
 
 //Generate a random special character - ! @ # $ %  & * ?
-var genSpecialChar = function () {
+var genOneRandomSpecialChar = function () {
     const spChar = "!@#$%&*?";
-    return randomOut(spChar);
+    return getOneRandomChar(spChar);
 }
 
 //Generate random trailing character after required character type is generated
-var genGenericChar = function () {
+var genOneRandomGenericChar = function () {
     const genericChar = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%&*?";
-    return randomOut(genericChar);
+    return getOneRandomChar(genericChar);
 }
 
 

@@ -37,13 +37,13 @@ The following image demonstrates the application functionality:
 
 # Git & Application Deployed URL
 
-# Github Repository
+## Github Repository
 All files and changes made are located on github at the following location:
 
 https://github.com/htang2021/password-gen
 
 
-# Application Live URL
+## Application Live URL
 https://htang2021.github.io/password-gen/
 
 

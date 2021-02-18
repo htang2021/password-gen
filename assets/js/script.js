@@ -146,36 +146,31 @@ var randomOut = function (stringArg) {
 //Generate a random Upper case letter
 var genCapLetter = function() {
     const capLetters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-    let aCapLetter = randomOut(capLetters);
-    return aCapLetter;
+    return randomOut(capLetters);
 }
 
 //Generate a random lower case letter
 var genLowerCaseLetter = function () {
     const lowerCaseLetters = "abcdefghijklmnopqrstuvwxyz"
-    let aLowerCaseLetter = randomOut(lowerCaseLetters);
-    return aLowerCaseLetter;
+    return randomOut(lowerCaseLetters);
 }
 
 //Generate a random number between 0-9
 var genRandomNum = function () {
     const ranNum = "0123456789"
-    let aRandomNum = randomOut(ranNum);
-    return aRandomNum;
+    return randomOut(ranNum);
 }
 
 //Generate a random special character - ! @ # $ %  & * ?
 var genSpecialChar = function () {
     const spChar = "!@#$%&*?";
-    let aSpecialChar = randomOut(spChar);
-    return aSpecialChar;
+    return randomOut(spChar);
 }
 
 //Generate random trailing character after required character type is generated
 var genGenericChar = function () {
     const genericChar = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%&*?";
-    let aGenericChar = randomOut(genericChar);
-    return aGenericChar;
+    return randomOut(genericChar);
 }
 
 

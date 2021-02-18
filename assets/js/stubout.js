@@ -2,13 +2,13 @@
 /*****************************************************/
 
 // Prompt to include Upper Case letter?
-var yesUpper = function (flag) {
+var yesUpper = function () {
     
     return true;
 }
 
 //Prompt to include lower case letter?
-var yesLower = function (flag) {
+var yesLower = function () {
     return true;
 }
 
@@ -33,7 +33,19 @@ var passwordLength = function () {
 /****************************************************************/
 var pwCharString = function () {
     let combinedString ="";
-    
+    if (yesLower) {
+        combinedString += "abcdefghijklmnopqrstuvwxyz";
+    }
+    if (yesUpper) {
+        combinedString += "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    }
+    if (yesNumber) {
+        combinedString += "0123456789";
+    }
+    if (yesSpChar) {
+        combinedString += "~!@#$%^&*?";
+    }
+    return combinedString;
 }
 
 /**** Generate random character out of a string argument *******/
@@ -75,13 +87,20 @@ var genSpecialChar = function () {
     return aSpecialChar;
 }
 
+//Generate a random character based on the combined string
+var genGenericChar = function () {
+    let genericChar = combinedString();
+    let aGenericChar = randomOut(genericChar);
+    return aGenericChar;
+}
+
 /******************Password Gen Logics************************/
 /*********************************************************/
 
 var genRandomPassword = function () {
-    
+    var pwLength = passwordLength();
     var psWord = "";
-    for (i=0; i < passwordLength; i++) {
+    for (i=0; i < pwLength; i++) {
         if (yesLower) {
             psWord += genLowerCaseLetter();
             yesLower = false;
@@ -89,13 +108,18 @@ var genRandomPassword = function () {
             psWord += genCapLetter();
             yesUpper = false;
         } else if (yesNumber) {
-            psWord
+            psWord += genRandomNum();
+            yesNumber = false;
+        } else if (yesSpChar) {
+            psWord += genSpecialChar();
+            yesSpChar = false;
+        } else {
+            psWord += genGenericChar();
         }
         
     }
 
-    //loops through specified length of times to generate passwd
-    return passWord; 
+    return pwword; 
 }
 
 /*****************Validation of included characters***********/

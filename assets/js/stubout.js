@@ -2,12 +2,13 @@
 /*****************************************************/
 
 // Prompt to include Upper Case letter?
-var yesUpper = function () {
+var yesUpper = function (flag) {
+    
     return true;
 }
 
 //Prompt to include lower case letter?
-var yesLower = function () {
+var yesLower = function (flag) {
     return true;
 }
 
@@ -24,35 +25,53 @@ var yesSpChar = function () {
 
 //Prompt for length of password
 var passwordLength = function () {
-    return length;
+    return 9;
 }
 
+
+//****** Generate a string of concatenated character types ******/
+/****************************************************************/
+var pwCharString = function () {
+    let combinedString ="";
+    
+}
+
+/**** Generate random character out of a string argument *******/
+/***************************************************************/
+
+var randomOut = function (stringArg) {
+    var stringIndex = Math.floor(Math.random() * stringArg.length);
+    return stringArg[stringIndex];
+}
 
 /************  Generating output  *************************/
 /**********************************************************/
 
-
 //Generate a random Upper case letter
 var genCapLetter = function() {
     const capLetters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    let aCapLetter = randomOut(capLetters);
     return aCapLetter;
 }
 
 //Generate a random lower case letter
 var genLowerCaseLetter = function () {
-    costt lowerCaseLetters = "abcdefghijklmnopqrstuvwxyz"
+    const lowerCaseLetters = "abcdefghijklmnopqrstuvwxyz"
+    let aLowerCaseLetter = randomOut(lowerCaseLetters);
     return aLowerCaseLetter;
 }
 
 //Generate a random number between 0-9
 var genRandomNum = function () {
     const ranNum = "0123456789"
+    let aRandomNum = randomOut(ranNum);
     return aRandomNum;
 }
 
-//Generate a random special character
+//Generate a random special character - ~ ! @ # $ % ^ & * ?
 var genSpecialChar = function () {
     const spChar = "~!@#$%^&*?";
+    let aSpecialChar = randomOut(spChar);
     return aSpecialChar;
 }
 
@@ -60,7 +79,20 @@ var genSpecialChar = function () {
 /*********************************************************/
 
 var genRandomPassword = function () {
-    var pwChar = capLetters + lowerCaseLetters + ranNum + spChar;
+    
+    var psWord = "";
+    for (i=0; i < passwordLength; i++) {
+        if (yesLower) {
+            psWord += genLowerCaseLetter();
+            yesLower = false;
+        } else if (yesUpper) {
+            psWord += genCapLetter();
+            yesUpper = false;
+        } else if (yesNumber) {
+            psWord
+        }
+        
+    }
 
     //loops through specified length of times to generate passwd
     return passWord; 

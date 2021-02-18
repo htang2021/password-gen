@@ -53,17 +53,8 @@ var passLength = function() {
 var yesUpper = function() {
   var includeUpperCase = prompt("Upper case? \n" +
   "1 for YES; 0 for NO.");
-
   includeUpperCase = parseInt(includeUpperCase);
-  console.log(includeUpperCase);
-  
-  if (includeUpperCase) {
-    includeUpperCase = "true";
-    return includeUpperCase;
-  } else {
-    includeUpperCase = "false";
-    return includeUpperCase;
-  }
+  return (includeUpperCase ? true : false);
 }
 
 //Prompt to include lowerCase letters, "true " if yes otherwise "false"
@@ -72,7 +63,6 @@ var yesLower = function() {
   "1 for YES; 0 for NO.");
 
   includeLowerCase = parseInt(includeLowerCase);
-  console.log(includeLowerCase);
 
   if (includeLowerCase) {
     includeLowerCase = "true";

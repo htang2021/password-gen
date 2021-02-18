@@ -1,31 +1,83 @@
+// Assignment Code
+var generateBtn = document.querySelector("#generate");
+
+var generatePassword = function () {
+    var randomPassWord = genRandomPassword();
+    return randomPassWord;
+  }
+  
+  // Write password to the #password input
+  function writePassword() {
+    console.log("Function is called after 'click'.");
+    var password = generatePassword();
+    var passwordText = document.querySelector("#password");
+  
+    passwordText.value = password;
+  
+  }
+  
+
 /********** Gathering Input **************************/
 /*****************************************************/
 
 // Prompt to include Upper Case letter?
 var yesUpper = function () {
-    
-    return true;
+    var includeUpperCase = prompt("UPPER case letters? \n" + "1 for YES; 0 for NO.");
+    includeUpperCase = parseInt(includeUpperCase);
+    return (includeUpperCase ? true : false);
 }
 
 //Prompt to include lower case letter?
-var yesLower = function () {
-    return true;
-}
+var yesLower = function() {
+    var includeLowerCase = prompt("lower case letters? \n" + "1 for YES; 0 for NO.");
+    includeLowerCase = parseInt(includeLowerCase);
+    return (includeLowerCase ? true : false);
+
+    /*if (includeLowerCase) {
+      includeLowerCase = "true";
+      return includeLowerCase;
+    } else {
+      includeLowerCase = "false";
+      return includeLowerCase;
+    } */
+  }
 
 //Prompt to include number?
-var yesNum = function () {
-    return true;
-}
+var yesNumber = function() {
+    var includeNum = prompt("Numeric values? \n" + "1 for YES; 0 for NO.");
+    includeNum = parseInt(includeNum);
+    return (includeNum ? true : false);
+    /*
+    if (includeNum) {
+      includeNum = "true";
+      return includeNum;
+    } else {
+      includeNum = "false";
+      return includeNum;
+    } */
+  }
 
 //Prompt to include special character?
-var yesSpChar = function () {
-    return true;
-}
+var yesSpChar = function() {
+    var includeSpChar = prompt("Special characters? \n" + "1 for YES; 0 for NO.");
+    includeSpChar = parseInt(includeSpChar);
+    return (includeSpChar ? true : false);
+    /*
+    if (includeSpChar) {
+      includeSpChar = "true";
+      return includeSpChar;
+    } else {
+      includeSpChar = "false";
+      return includeSpChar;
+    } */
+  }
 
 
 //Prompt for length of password
 var passwordLength = function () {
-    return 9;
+    var pwLength = prompt("Password length?"); 
+    pwLength = parseInt(pwLength);
+    return pwLength; 
 }
 
 
@@ -80,16 +132,16 @@ var genRandomNum = function () {
     return aRandomNum;
 }
 
-//Generate a random special character - ~ ! @ # $ % ^ & * ?
+//Generate a random special character - ! @ # $ %  & * ?
 var genSpecialChar = function () {
-    const spChar = "~!@#$%^&*?";
+    const spChar = "!@#$%&*?";
     let aSpecialChar = randomOut(spChar);
     return aSpecialChar;
 }
 
 //Generate a random character based on the combined string
 var genGenericChar = function () {
-    let genericChar = combinedString();
+    let genericChar = pwCharString();
     let aGenericChar = randomOut(genericChar);
     return aGenericChar;
 }
@@ -99,50 +151,33 @@ var genGenericChar = function () {
 
 var genRandomPassword = function () {
     var pwLength = passwordLength();
+    var lowerTrue = yesLower();
+    var upperTrue = yesUpper();
+    var numberTrue = yesNumber();
+    var spCharTrue = yesSpChar();
     var psWord = "";
     for (i=0; i < pwLength; i++) {
-        if (yesLower) {
+        if (lowerTrue) {
             psWord += genLowerCaseLetter();
-            yesLower = false;
-        } else if (yesUpper) {
+            lowerTrue = false;
+        } else if (upperTrue) {
             psWord += genCapLetter();
-            yesUpper = false;
-        } else if (yesNumber) {
+            upperTrue = false;
+        } else if (numberTrue) {
             psWord += genRandomNum();
-            yesNumber = false;
-        } else if (yesSpChar) {
+            numberTrue = false;
+        } else if (spCharTrue) {
             psWord += genSpecialChar();
-            yesSpChar = false;
+            spCharTrue = false;
         } else {
+            console.log(psWord);
             psWord += genGenericChar();
+            console.log(psWord);
         }
-        
     }
-
-    return pwword; 
+    return psWord; 
 }
 
-/*****************Validation of included characters***********/
-/*************************************************************/
+// Add event listener to generate button
+generateBtn.addEventListener("click", writePassword);
 
-var hasUpperCaseLetter = function (genRandomPassword) {
-    return true;
-}
-
-var hasLowerCaseLetter = function (genRandomPassword) {
-    return true;
-}
-
-var hasRanNum = function (genRandomPassword) {
-    return true;
-}
-
-var hasSpChar = function (genRandomPassword) {
-    return true;
-}
-
-if ((hasUpperCaseLetter) && (hasLowerCaseLetter) && (hasRanNum) && (hasSpChar)) {
-    return genRandomPassword;
-} else {
-    genRandomPassword ();
-}

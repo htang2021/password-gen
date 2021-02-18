@@ -34,7 +34,7 @@ THEN the password is either displayed in an alert or written to the page
 
 The following image demonstrates the application functionality:
 
-!(.assets/images/03-javascript-homework-demo.png)
+![](.assets/images/03-javascript-homework-demo.png)
 
 ## Review
 

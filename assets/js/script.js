@@ -3,11 +3,12 @@ var generateBtn = document.querySelector("#generate");
 
 var generatePassword = function () {
     var pwLength = passwordLength();
-    var needLower = isLowerCaseRequired();
-    var needUpper = isUpperCaseRequired();
-    var needNumber = isNumberRequired();
-    var needSpChar = isSpecialCharRequired();
-    checkPasswordCharTypeRequirement(needLower, needUpper, needNumber, needSpChar);
+    do {
+        var needLower = isLowerCaseRequired();
+        var needUpper = isUpperCaseRequired();
+        var needNumber = isNumberRequired();
+        var needSpChar = isSpecialCharRequired();
+    } while (!passwordCharTypeRequirementMet(needLower, needUpper, needNumber, needSpChar));
     var psWord = "";
     for (i=0; i < pwLength; i++) {
         if (needLower) {
@@ -43,94 +44,93 @@ var generatePassword = function () {
 
 //Prompt for length of password and validate entry
 var passwordLength = function () {
-    var pwLength = prompt("How long do you want your password to be, between 8 and 128 in length?");
-    pwLength = parseInt(pwLength);
-    if (pwLength < 8 || pwLength > 128) {
-        alert("You did not enter the appropriate length for your password.\n" +
-        "Please enter a length that's between 8 and 128.");
-        passwordLength();
-    } else if (isNaN(pwLength)) {
-        alert("You have entered a non numeric value.  Please try again!");
-        passwordLength();
-    } else {
-        return pwLength;
+    var pwLength = 0;
+    while (pwLength < 8 || pwLength > 128 || isNaN(pwLength)) {
+        pwLength = prompt("Please enter the length of your password, between 8 and 128 in length.");
+        pwLength = parseInt(pwLength);
+        if (pwLength >= 8 && pwLength <= 128) {
+            return pwLength;
+        } else {
+            alert("You have entered an invalid entry.  Please try again.");
+        }
     }
 }
 
 // Prompt to include Upper Case letter and validate entry
 var isUpperCaseRequired = function () {
-    var includeUpperCase = prompt("Do you want to include UPPER CASE letters in your password? \n" +
-    "Please enter 1 for YES; 0 for NO.");
-    includeUpperCase = parseInt(includeUpperCase);
+    var includeUpperCase;
+    while (includeUpperCase != 1 && includeUpperCase != 0) {
+        includeUpperCase = prompt("Do you want to include UPPER CASE letters in your password? \n" +
+        "Please enter 1 for YES; 0 for NO.");
 
-    if (includeUpperCase != 1 && includeUpperCase != 0) {
-        alert("You have entered an incorrect value.  Please try again.");
-        isUpperCaseRequired();
-    } else if (includeUpperCase) {
-        return true;
-    } else {
-        return false;
+        includeUpperCase = parseInt(includeUpperCase);
+
+        if (includeUpperCase != 1 && includeUpperCase != 0) {
+            alert("You have entered an incorrect value.  Please try again.");
+        }
     }
+    return (includeUpperCase === 1);
 }
 
 //Prompt to include lower case letter and validate entry
 var isLowerCaseRequired = function() {
-    var includeLowerCase = prompt("Do you want to include lower CASE letters in your password? \n" +
-    "Please enter 1 for YES; 0 for NO.");
-    includeLowerCase = parseInt(includeLowerCase);
+    var includeLowerCase;
+    while (includeLowerCase != 0 && includeLowerCase != 1) {
+        includeLowerCase = prompt("Do you want to include lower CASE letters in your password? \n" +
+        "Please enter 1 for YES; 0 for NO.");
 
-    if (includeLowerCase != 0 && includeLowerCase != 1) {
-        alert("You have entered an incorrect value.  Please try again.");
-        isLowerCaseRequired();
-    } else if (includeLowerCase) {
-        return true;
-    } else {
-        return false;
+        includeLowerCase = parseInt(includeLowerCase);
+  
+        if (includeLowerCase != 1 && includeLowerCase != 0) {
+            alert("You have entered an incorrect value.  Please try again.");
+        }
     }
+    return (includeLowerCase === 1);
 }
 
 //Prompt to include numeric value and validate entry
 var isNumberRequired = function() {
-    var includeNum = prompt("Do you want to include numeric values in your password? \n" +
-    "Please enter 1 for YES; 0 for NO.");
-    includeNum = parseInt(includeNum);
+    var includeNum;
+    while (includeNum != 1 && includeNum != 0) {
+        includeNum = prompt("Do you want to include numeric values in your password? \n" +
+        "Please enter 1 for YES; 0 for NO.");
 
-    if (includeNum != 1 && includeNum != 0) {
-        alert("You have entered an incorrect value.  Please try again.");
-        isNumberRequired();
-    } else if (includeNum) {
-        return true;
-    } else {
-        return false;
+        includeNum = parseInt(includeNum);
+
+        if (includeNum != 1 && includeNum != 0) {
+            alert("You have entered an incorrect value.  Please try again.");
+        }
     }
+    return (includeNum === 1);
 }
 
 //Prompt to include special character and validate entry
 var isSpecialCharRequired = function() {
-    var includeSpChar = prompt("Do you want to include special characters in your password? \n" +
-    "Please enter 1 for YES; 0 for NO.");
-    includeSpChar = parseInt(includeSpChar);
+    var includeSpChar;
+    while (includeSpChar != 1 && includeSpChar != 0) {
+        includeSpChar = prompt("Do you want to include special characters in your password? \n" +
+        "Please enter 1 for YES; 0 for NO.");
 
-    if (includeSpChar != 1 && includeSpChar != 0) {
-        alert("You have entered an incorrect value.  Please try again.");
-        isSpecialCharRequired();
-    } else if (includeSpChar) {
-        return true;
-    } else {
-        return false;
+        includeSpChar = parseInt(includeSpChar);
+
+        if (includeSpChar != 1 && includeSpChar != 0) {
+            alert("You have entered an incorrect value.  Please try again.");
+        }
     }
+    return (includeSpChar === 1);
 }
 
 //Check if at least one character type is selected
-var checkPasswordCharTypeRequirement = function (needLower, needUpper, needNumber, needSpChar) {
+var passwordCharTypeRequirementMet = function (needLower, needUpper, needNumber, needSpChar) {
+
     if (needLower === false && needUpper === false && needNumber === false && needSpChar === false) {
         alert("You need at least one character type in your password. \n" +
         "Please start over!");
-        generatePassword();
+        return false;
+    } else { 
+        return true;
     }
-    return;
 }
-
 
 /**** Generate random character out of a string argument *******/
 /***************************************************************/
